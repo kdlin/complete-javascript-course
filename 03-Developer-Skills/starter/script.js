@@ -102,7 +102,7 @@ const tracker = function(arr) {
     'avgHrs': totalHrs / arr.length,
     'mostHrs': Math.max(...arr), 
     'numDaysWorked': arr.filter(hours => hours > 0).length,
-    'isFullTime': totalHrs >= 35,
+    'isFullTime': totalHrs >= 35
   }
    return obj;
 }
