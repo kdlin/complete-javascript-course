@@ -2,15 +2,8 @@
 
 
 // add a rand number
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20; 
-document.querySelector('.again').addEventListener('click', () => {
-  const secretNumber = Math.trunc(Math.random() * 20) + 1;
-  const score = 0;
-  document.querySelector('.message').textContent = 'Start Guessing';
-  document.querySelector('body').style.backgroundColor = '#222';
-  document.querySelector('.guess').value = '';
-})
 
 document.querySelector(".check").addEventListener
 ('click', function() {
@@ -52,8 +45,19 @@ document.querySelector(".check").addEventListener
 });
 
 
+// State Reset
+document.querySelector('.again').addEventListener('click', () => {
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  score = 0;
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.message').textContent = 'Start Guessing';
+  document.querySelector('.guess').value = '';
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
+})
 
-
+// implement highscore;
 
 
 
