@@ -20,11 +20,11 @@ document.querySelector(".check").addEventListener
     document.querySelector('.message').textContent = 
     'Correct Num!';
     document.querySelector('body').style.backgroundColor = '#008000';
-
+    document.querySelector('.number').style.width = '30rem';
   // Guess Too high 
   } else if (guess > secretNumber) {
        if (score > 1) { 
-         document.querySelector('.message').textContent = 'Too High'; 
+        document.querySelector('.message').textContent = 'Too High'; 
         score--;
         document.querySelector('.score').textContent = score;
        } else {
