@@ -4,8 +4,14 @@
 // add a rand number
 const secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20; 
+document.querySelector('.again').addEventListener('click', () => {
+  const secretNumber = Math.trunc(Math.random() * 20) + 1;
+  const score = 0;
+  document.querySelector('.message').textContent = 'Start Guessing';
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.guess').value = '';
+})
 
-document.querySelector('.number').textContent = secretNumber;
 document.querySelector(".check").addEventListener
 ('click', function() {
   const guess = Number(document.querySelector('.guess').value);
@@ -19,6 +25,7 @@ document.querySelector(".check").addEventListener
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = 
     'Correct Num!';
+    document.querySelector('.number').textContent = secretNumber;
     document.querySelector('body').style.backgroundColor = '#008000';
     document.querySelector('.number').style.width = '30rem';
   // Guess Too high 
