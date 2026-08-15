@@ -45,3 +45,66 @@ const findTempTwo = function(t1, t2) {
 
 const tempTwo = [80, -40]
 console.log(findTempTwo(tempTwo, temperatures));
+
+console.log(`end of Prob 1 & 2`);
+
+
+// Coding Challenge #1
+
+/*
+Given an array of forecasted maximum temperatures, the thermometer displays a string with these temperatures.
+
+Example: [17, 21, 23] will print "... 17ºC in 1 days ... 21ºC in 2 days ... 23ºC in 3 days ..."
+
+Create a function 'printForecast' which takes in an array 'arr' and logs a string like the above to the console.
+
+Use the problem-solving framework: Understand the problem and break it up into sub-problems!
+
+1) Understand the problem 
+each num in arr into string 
+
+TEST DATA 1: [17, 21, 23]
+TEST DATA 2: [12, 5, -5, 0, 4] */ 
+
+const printForecast = function(arr) { 
+  let output = '...'; 
+  for (let i = 0; i < arr.length; i++) {
+    output += `${arr[i]}c in ${i + 1} days ...`;
+  } 
+
+  return output;
+}
+
+console.log(printForecast([17,21,23]));
+console.log(printForecast([12, 5, -5, 0, 4]));
+
+
+///////////////////////////////////////
+// Coding Challenge #2 With AI
+
+/*
+Let's say you're building a time tracking application for freelancers. At some point in building this app, you need a function that receives daily work hours for a certain week, and returns:
+1. Total hours worked
+2. Average daily hours
+3. The day with the most hours worked
+4. Number of days worked
+5. Whether the week was full-time (worked 35 hours or more)
+
+TEST DATA: [7.5, 8, 6.5, 0, 8.5, 4, 0]
+*/ 
+
+const tracker = function(arr) {
+   let totalHrs = arr.reduce((acc, x) => acc + x , 0); 
+   let mostHrs = Math.max(...arr);
+
+  const obj = { 
+    totalHrs, 
+    'avgHrs': totalHrs / arr.length,
+    'mostHrs': Math.max(...arr), 
+    'numDaysWorked': arr.filter(hours => hours > 0).length,
+    'isFullTime': totalHrs >= 35,
+  }
+   return obj;
+}
+
+console.log(tracker([7.5, 8, 6.5, 0, 8.5, 4, 0]));
