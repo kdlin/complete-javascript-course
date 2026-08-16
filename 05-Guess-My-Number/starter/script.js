@@ -66,6 +66,3 @@ document.querySelector('.again').addEventListener('click', () => {
 })
 
 // implement highscore;
-
-
-
