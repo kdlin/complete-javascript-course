@@ -7,15 +7,23 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.close-modal');
 const btnsOpenModal = document.querySelectorAll('.show-modal');
 
-// Add EventListener to buttons
-for (let btn of btnsOpenModal) { 
-  btn.addEventListener('click', () => {
-    modal.classList.remove('hidden'); // Don't use .hidden -> hidden 
-    overlay.classList.remove('hidden');
-  });
-}
-
-btnCloseModal.addEventListener('click', () => {
+// define closeModal & openModal which modify classList toggling .hidden class
+const closeModal = () => { 
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
-})
+} 
+
+const openModal = () => {
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+// Add EventListener to buttons
+// when clicked, button removes .hidden css class 
+for (let btn of btnsOpenModal) { 
+  btn.addEventListener('click', openModal);  
+}
+
+// when closeBtn click or overlay click, toggle hidden class
+btnCloseModal.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
