@@ -33,8 +33,8 @@ overlay.addEventListener('click', closeModal);
 // Any time key is pressed, object of keydown event is created 
 // Global Events 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape')
-    if (!modal.classList.contains('hidden')) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden'))
       closeModal();
-    }
 }) 
+
+// finished
