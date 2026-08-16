@@ -1,6 +1,6 @@
 'use strict';
 
-// Selecting Score0 & Score1
+// DOM Elements Selection
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 const score0El = document.querySelector('#score--0');
@@ -13,6 +13,7 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
+// Initial State
 score0El.textContent = 0;
 score1El.textContent = 0; 
 diceEl.classList.add('hidden');
@@ -41,6 +42,8 @@ btnRoll.addEventListener('click', () => {
     // Set Dice value + state
     const dice = Math.trunc(Math.random() * 6 + 1)
     console.log(dice);
+
+    // Display Dice
     diceEl.classList.remove('hidden');
     diceEl.src = `dice-${dice}.png`;
   
@@ -49,12 +52,8 @@ btnRoll.addEventListener('click', () => {
       currScore += dice;
       document.querySelector(`#current--${activePlayer}`).textContent = currScore;
 
-    // when 1, update, then switch players
+    // when 1, no change to score, then switch players
     } else { 
-      // State Change for CurrPlayer
-      finalScores[activePlayer] += currScore;
-      document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer]
-      
       switchPlayer();
     }
   }
@@ -74,4 +73,5 @@ btnHold.addEventListener('click', () => {
   } else {
     switchPlayer();
   } 
-})
+});
+
