@@ -14,26 +14,39 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 // Initial State
-score0El.textContent = 0;
-score1El.textContent = 0; 
-diceEl.classList.add('hidden');
+let finalScores, currScore, activePlayer, isPlaying;
+// initialize game
+const init = () => {
+  finalScores = [0, 0];
+  currScore = 0; 
+  activePlayer = 0;
+  isPlaying = true;
 
-const finalScores= [0, 0];
-let currScore = 0; 
-let activePlayer = 0;
-let isPlaying = true;
+  score0El.textContent = 0;
+  score1El.textContent = 0; 
+  curr0El.textContent = 0;
+  curr1El.textContent = 0;
+  diceEl.classList.add('hidden');
+
+  // Visible changes
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+}
+
+init();
 
 const switchPlayer = () => { 
     // reset currScore for activePlayer
     document.querySelector(`#current--${activePlayer}`).textContent = 0;
     currScore = 0;
-
+    // Switch Active Player
+    activePlayer = activePlayer === 0 ? 1 : 0;
     // Toggle background active colors
     player0El.classList.toggle('player--active');
     player1El.classList.toggle('player--active');
-
-    // Switch Active Player
-    activePlayer = activePlayer === 0 ? 1 : 0;
 }
 
 // Rolling dice functionality
@@ -57,21 +70,25 @@ btnRoll.addEventListener('click', () => {
       switchPlayer();
     }
   }
-})
+});
 
 
 // for hold button, allows switching before hitting 1
 btnHold.addEventListener('click', () => {
-  finalScores[activePlayer] += currScore;
-  document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer];
+  if (isPlaying) {
+    finalScores[activePlayer] += currScore;
+    document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer];
 
-  if (finalScores[activePlayer] >= 100) {
-    isPlaying = false;
-    document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
-    document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
-    
-  } else {
-    switchPlayer();
+    if (finalScores[activePlayer] >= 100) {
+      isPlaying = false;
+      document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+      document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+      
+    } else {
+      switchPlayer();
+    }
   } 
 });
 
+// Action for New Game
+btnNew.addEventListener('click', init);
