@@ -20,33 +20,58 @@ diceEl.classList.add('hidden');
 const finalScores= [0, 0];
 let currScore = 0; 
 let activePlayer = 0;
+let isPlaying = true;
 
-// Rolling dice functionality
-btnRoll.addEventListener('click', () => {
-  const dice = Math.trunc(Math.random() * 6 + 1)
-  console.log(dice);
-  diceEl.classList.remove('hidden');
-  diceEl.src = `dice-${dice}.png`;
- 
-  // roll 1 ? 
-  if (dice !== 1) { 
-    currScore += dice;
-    document.querySelector(`#current--${activePlayer}`).textContent = currScore;
-
-  } else { 
-    // State Change for CurrPlayer
-    finalScores[activePlayer] += currScore;
-    document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer]
+const switchPlayer = () => { 
+    // reset currScore for activePlayer
     document.querySelector(`#current--${activePlayer}`).textContent = 0;
-
-    // Switch Active Player
     currScore = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
 
     // Toggle background active colors
     player0El.classList.toggle('player--active');
     player1El.classList.toggle('player--active');
-   
-   // add currScore to total 
+
+    // Switch Active Player
+    activePlayer = activePlayer === 0 ? 1 : 0;
+}
+
+// Rolling dice functionality
+btnRoll.addEventListener('click', () => {
+  if (isPlaying) {
+    // Set Dice value + state
+    const dice = Math.trunc(Math.random() * 6 + 1)
+    console.log(dice);
+    diceEl.classList.remove('hidden');
+    diceEl.src = `dice-${dice}.png`;
+  
+    // If not 1, update score and keep rolling
+    if (dice !== 1) { 
+      currScore += dice;
+      document.querySelector(`#current--${activePlayer}`).textContent = currScore;
+
+    // when 1, update, then switch players
+    } else { 
+      // State Change for CurrPlayer
+      finalScores[activePlayer] += currScore;
+      document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer]
+      
+      switchPlayer();
+    }
   }
+})
+
+
+// for hold button, allows switching before hitting 1
+btnHold.addEventListener('click', () => {
+  finalScores[activePlayer] += currScore;
+  document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer];
+
+  if (finalScores[activePlayer] >= 100) {
+    isPlaying = false;
+    document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+    document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+    
+  } else {
+    switchPlayer();
+  } 
 })
