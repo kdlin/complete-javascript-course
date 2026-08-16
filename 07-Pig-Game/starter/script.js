@@ -26,7 +26,6 @@ const init = () => {
   score1El.textContent = 0; 
   curr0El.textContent = 0;
   curr1El.textContent = 0;
-  diceEl.classList.add('hidden');
 
   // Visible changes
   diceEl.classList.add('hidden');
@@ -79,7 +78,7 @@ btnHold.addEventListener('click', () => {
     finalScores[activePlayer] += currScore;
     document.querySelector(`#score--${activePlayer}`).textContent = finalScores[activePlayer];
 
-    if (finalScores[activePlayer] >= 100) {
+    if (finalScores[activePlayer] >= 20) {
       isPlaying = false;
       document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
       document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
