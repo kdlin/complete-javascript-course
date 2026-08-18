@@ -75,3 +75,6 @@ There is also a the [updates-and-fixes](https://github.com/jonasschmedtmann/comp
 
 NOTES
 - React component makes request -> Typescript / backend validation of req -> SQL query from DB -> returns rows -> Typescript transforms rows -> JSON to Reacft component -> displays [Usually async] 
+
+
+- const respone = await fetch(secure API call) - TypeScript should validate user (does currUser.permissions === 'admin' ? or 'editor' ?? 
